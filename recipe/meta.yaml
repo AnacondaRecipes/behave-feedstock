@@ -12,7 +12,6 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<37]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - behave = behave.__main__:main
@@ -26,9 +25,9 @@ requirements:
     - wheel
   run:
     - python
-    - parse >=1.6.3
-    - parse_type >=0.3.4
-    - six
+    - parse >=1.8.2
+    - parse_type >=0.4.2
+    - six >=1.11
 
 test:
   imports:
