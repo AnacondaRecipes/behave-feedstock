@@ -6,7 +6,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 2b8f4b64ed2ea756a5a2a73e23defc1c4631e9e724c499e46661778453ebaf51
 
@@ -21,17 +20,16 @@ requirements:
   host:
     - python
     - setuptools
-    # which will be released with 1.2.7
     - pip
     - wheel
   run:
     - python
-    - parse >=1.18.0
-    - parse_type >=0.6.0
-    - six >=1.15.0
     - cucumber-tag-expressions >=4.1.0
     - cucumber-expressions >=17.1.0  # [py>=38]
     - enum34  # [py<34]
+    - parse >=1.18.0
+    - parse_type >=0.6.0
+    - six >=1.15.0
     - contextlib2  # [py<35]
     - pathlib  # [py<34]
     - pathlib2 >=2.3.6  # [py<36]
@@ -42,17 +40,84 @@ requirements:
     - tomli >=1.1.0  # [py>=30 and py<311]
     - toml >=0.10.2  # [py<30]
 
+# E   ModuleNotFoundError: No module named 'hamcrest'
+
 test:
+  source_files:
+    - tests
   imports:
     - behave
-    - behave.compat
+    - behave.__main__
+    - behave._stepimport
+    - behave._types
+    - behave.active_tag
+    - behave.active_tag.python
+    - behave.active_tag.python_feature
+    - behave.api.async_step
+    - behave.api.pending_step
+    - behave.api.runner
+    - behave.api.runtime_constraint
+    - behave.api.step_matchers
+    - behave.async_step
+    - behave.capture
+    - behave.compat.collections
+    - behave.compat.exceptions
+    - behave.configuration
+    - behave.constant
+    - behave.contrib.csv_table_from_file
+    - behave.cucumber_expression
+    - behave.exception
+    - behave.exception_util
+    - behave.fixture
     - behave.formatter
-    - behave.reporter
+    - behave.formatter._registry
+    - behave.formatter.ansi_escapes
+    - behave.formatter.api
+    - behave.formatter.base
+    - behave.formatter.base2
+    - behave.formatter.steps
+    - behave.importer
+    - behave.log_capture
+    - behave.log_config
+    - behave.matchers
+    - behave.model
+    - behave.model_core
+    - behave.model_describe
+    - behave.model_type
+    - behave.model_visitor
+    - behave.parameter_type
+    - behave.parser
+    - behave.pathutil
+    - behave.python_feature
+    - behave.reporter.base
+    - behave.reporter.summary
+    - behave.runner
+    - behave.runner_plugin
+    - behave.runner_util
+    - behave.step_registry
+    - behave.summary
+    - behave.tag_expression
+    - behave.tag_expression.builder
+    - behave.tag_expression.model
+    - behave.tag_expression.parser
+    - behave.tag_expression.v1
+    - behave.tag_matcher
+    - behave.textutil
+    - behave.userdata
+    - behave.version
   requires:
     - pip
+    - pytest >=5.0
+    - assertpy >=1.1
+    - pyhamcrest >=2.0.2
+    - chardet
+    - mock >=4.0
   commands:
-    - behave --help
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - behave --help
+    - pytest -v tests
+
 
 about:
   home: https://github.com/behave/behave
