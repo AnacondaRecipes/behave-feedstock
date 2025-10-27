@@ -14,7 +14,8 @@ build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - behave = behave.__main__:main
-  skip: true  # [py<27]
+  # Latest cucumber-tag-expressions is available for py310+, drop py39 since it will be deprecated soon.
+  skip: true  # [py<310]
 
 requirements:
   host:
