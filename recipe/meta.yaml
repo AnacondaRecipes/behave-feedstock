@@ -35,12 +35,10 @@ requirements:
     - pathlib2 >=2.3.6  # [py<36]
     - scandir >=1.10.0  # [py<35]
     - traceback2  # [py<30]
-    - win_unicode_console  # [py<=39]
+    - win_unicode_console  # [py<=39 and win]
     - colorama >=0.3.7
     - tomli >=1.1.0  # [py>=30 and py<311]
     - toml >=0.10.2  # [py<30]
-
-# E   ModuleNotFoundError: No module named 'hamcrest'
 
 test:
   source_files:
