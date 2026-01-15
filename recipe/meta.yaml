@@ -10,7 +10,7 @@ source:
   sha256: 2b8f4b64ed2ea756a5a2a73e23defc1c4631e9e724c499e46661778453ebaf51
 
 build:
-  number: 0
+  number: 0 #trigger
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - behave = behave.__main__:main
